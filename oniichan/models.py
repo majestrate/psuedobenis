@@ -4,8 +4,9 @@ from oniichan import util
 import flask
 
 from contextlib import contextmanager
+import logging
 
-
+log = logging.getLogger(__name__)
 
 class LocalUser(db.Model):
     """
@@ -34,6 +35,8 @@ class LocalUser(db.Model):
         """
         return util.hash_func(password, self.loginsalt) == self.logincred
 
+    def url(self):
+        return '/u/{}/'.format(self.username)
 
 def get_user_by_name(username):
     return LocalUser.query.filter_by(username = username).first()
@@ -53,7 +56,24 @@ def check_local_login(username, password):
 @contextmanager
 def visit_user_or_error(username, code):
     u =  get_user_by_name(username)
+    log.info("got user for visit: {} {}".format(username, u))
     if u is None:
         flask.abort(code)
     else:
         yield u
+
+def create_local_user(username, password):
+    log.info("created new user {}".format(username))
+    u = LocalUser(username, password)
+    db.session.add(u)
+    db.session.commit()
+    return u
+
+def has_user(username):
+    return LocalUser.query.filter_by(username = username).exists() is True
+
+
+
+
+
+db.create_all()

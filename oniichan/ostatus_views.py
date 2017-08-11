@@ -12,3 +12,8 @@ from flask import flash, redirect, url_for
 def ostatus_inbox(username):
     with models.visit_user_or_error(username, 404) as user:
         return ""
+
+@app.route("/u/<username>/", methods=["GET"])
+def ostatus_view_user(username):
+    with models.visit_user_or_error(username, 404) as user:
+        return template("user_view.html", user=user)

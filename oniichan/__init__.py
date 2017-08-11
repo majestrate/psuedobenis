@@ -1,3 +1,6 @@
+import logging
+logging.basicConfig(level=logging.INFO)
+
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
@@ -9,5 +12,4 @@ app.config.from_object('oniichan.config')
 CORS(app)
 db = SQLAlchemy(app)
 from oniichan import views
-from oniichan import activityhub_views
-db.create_all()
+from oniichan import ostatus_views
