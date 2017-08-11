@@ -8,6 +8,5 @@ app.config.from_object('oniichan.config')
 
 CORS(app)
 db = SQLAlchemy(app)
-
-from oniichan import db
 from oniichan import views
+db.create_all()

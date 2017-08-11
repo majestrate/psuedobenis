@@ -1,4 +1,5 @@
 from oniichan import app
+from oniichan import models
 from oniichan import templates
 from oniichan import config
 from oniichan import spam
@@ -22,11 +23,10 @@ def oniichan_login():
     """
     if flask.request.method == 'POST':
         form = flask.request.form
-        with db.open() as session:
-            if session.check_local_login(form["username"], form["password"]):
-                return redirect(url_for("/user/{}".format(form["username"])))
-            else:
-                flash("login failed")
+        if models.check_local_login(form["username"], form["password"]):
+            return redirect(url_for("/user/{}".format(form["username"])))
+        else:
+            flash("login failed")
     return template("login.html", title="log in")
 
 @app.route("/")
