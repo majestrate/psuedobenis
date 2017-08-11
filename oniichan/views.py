@@ -60,9 +60,9 @@ def oniichan_register_handler():
     username = form['username']
     if models.has_user(username):
         flash("username taken")
-        return redirect(url_for(oniichan_register_serve))
+        return redirect("/register/")
     models.create_local_user(username, form['password'])
-    return redirect(oniichan_login)
+    return redirect("/login/")
 
 
 @app.route("/")

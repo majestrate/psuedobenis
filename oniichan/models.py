@@ -74,7 +74,7 @@ def create_local_user(username, password):
     return u
 
 def has_user(username):
-    return LocalUser.query.filter_by(username = username).exists() is True
+    return LocalUser.query.filter_by(username = username).first() is not None
 
 
 
