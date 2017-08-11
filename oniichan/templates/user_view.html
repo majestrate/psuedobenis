@@ -4,11 +4,20 @@
 <script type="text/javascript" src="/static/js/poster.js">
 </script>
 {% endblock %}
-
 {% block title %}{{user.username}}{% endblock %}
 {% block page_body %}
+
+{% if 'user' in session %}
+<!-- logged in user info -->
 <div class="user-holder">
     <span> Hello {{user.username}} </span>
     <div id="poster"></div>
 </div>
+{% else %}
+
+<!-- user info -->
+<div class="user-holder">
+    This user's name is {{user.username}}
+</div>
+{% endif %}
 {% endblock %}

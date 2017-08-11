@@ -13,7 +13,12 @@ function poster_widget_inject(elem)
     var change_text = function(msgtxt, fadeout) {
         $("#"+poster_info_id).text(msgtxt);
         console.log("change poster text to '"+msgtxt+"'");
-        if(fadeout) $("#"+poster_info_id).delay(fadeout).fadeOut(100);
+        if(fadeout) {
+            $("#"+poster_info_id).delay(fadeout).fadeOut(500, function() {
+                $("#"+poster_info_id).text("");
+                $("#"+poster_info_id).fadeIn(10);
+            });
+        }
     };
 
     $("<div/>", {
@@ -32,8 +37,8 @@ function poster_widget_inject(elem)
             $.post("/api/post.json", /* api endpoint */
                    {message:txt}, /* post data */
                    function(data, text, xhr) { /* success func */
-                       var j = text;
-                       
+                       var j = data;
+                       console.log(j.error, text, xhr);
                        if(j.error) {
                            change_text("posting error: "+j.error, 1000);
                        } else {
