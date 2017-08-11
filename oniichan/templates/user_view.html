@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+
+{% block scripts_head %}
+<script type="text/javascript" src="/static/js/poster.js">
+</script>
+{% endblock %}
+
 {% block title %}{{user.username}}{% endblock %}
 {% block page_body %}
 <div class="user-holder">
     <span> Hello {{user.username}} </span>
+    <div id="poster"></div>
 </div>
 {% endblock %}

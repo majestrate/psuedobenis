@@ -13,3 +13,4 @@ CORS(app)
 db = SQLAlchemy(app)
 from oniichan import views
 from oniichan import ostatus_views
+from oniichan import api_views

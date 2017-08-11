@@ -38,6 +38,11 @@ class LocalUser(db.Model):
     def url(self):
         return '/u/{}/'.format(self.username)
 
+    def json(self):
+        return {
+            "username": self.username,
+        }
+
 def get_user_by_name(username):
     return LocalUser.query.filter_by(username = username).first()
 
@@ -49,9 +54,8 @@ def check_local_login(username, password):
     otherwise returns false
     """
     user = get_user_by_name(username)
-    if user is None:
-        return False
-    return user.check_login(password)
+    if user is not None and user.check_login(password):
+        return user
 
 @contextmanager
 def visit_user_or_error(username, code):
@@ -71,6 +75,7 @@ def create_local_user(username, password):
 
 def has_user(username):
     return LocalUser.query.filter_by(username = username).exists() is True
+
 
 
 

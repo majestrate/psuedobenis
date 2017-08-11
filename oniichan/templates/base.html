@@ -5,6 +5,9 @@
 <meta charset="UTF-8" />
 <link href="/static/bootstrap.css" rel="stylesheet">
 <link href="/static/style.css" rel="stylesheet">
+<script type="text/javascript" src="/static/contrib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/js/init.js"></script>
+{% block scripts_head %} {% endblock %}
 </head>
 <body>
   <section class="row">
@@ -17,5 +20,8 @@
   <section class="row">
     {% include "footer.html" %}
   </section>
+  <script type="text/javascript">
+   ready();
+  </script>
 </body>
 </html>
