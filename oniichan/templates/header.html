@@ -1,0 +1,16 @@
+<header class="col-md-8">
+  <table>
+    <tbody>
+      <tr>
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for message in messages %}
+          <td class="message-flash">{{message}}</td>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+      </tr>
+    </tbody>
+  </table>
+</header>

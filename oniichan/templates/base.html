@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<meta charset="UTF-8" />
+<link href="/static/bootstrap.css" rel="stylesheet">
+<link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+  <section class="row">
+    {% include "header.html" %}
+  </section>
+  <section class="page-body">
+    {% block page_body %}
+    {% endblock %}
+  </section>
+  <section class="row">
+    {% include "footer.html" %}
+  </section>
+</body>
+</html>
