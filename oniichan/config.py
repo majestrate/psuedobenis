@@ -5,7 +5,7 @@ board_base_dir = os.path.join(_root, "boards")
 media_dir = os.path.join(_root, "media")
 template_dirs = [ os.path.join(_root, "oniichan", "templates") ]
 enable_tor = True
-db_url = 'sqlite:///oniichan.db3'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///oniichan.db3'
 post_ratelimit = 30
 
 CSRF_ENABLED = True

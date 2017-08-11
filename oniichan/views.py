@@ -1,5 +1,4 @@
 from oniichan import app
-from oniichan import db
 from oniichan import templates
 from oniichan import config
 from oniichan import spam
