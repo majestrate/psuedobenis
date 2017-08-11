@@ -5,3 +5,14 @@ from oniichan import templates
 import flask
 from flask import render_template as template
 from flask import flash, redirect, url_for
+
+
+@app.route("/u/<username>/", methods=["POST"])
+def ahub_inbox(username):
+    with models.visit_user_or_error(username, 404) as user:
+        return ""
+
+@app.route("/u/<username>/", methods=["GET"])
+def ahub_serve_user(username):
+    with models.visit_user_or_error(username, 404) as user:
+        return template("user.html", user=user)

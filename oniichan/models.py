@@ -1,6 +1,12 @@
 from oniichan import db
 from oniichan import util
 
+import flask
+
+from contextlib import contextmanager
+
+
+
 class LocalUser(db.Model):
     """
     Locally owned user
@@ -43,3 +49,11 @@ def check_local_login(username, password):
     if user is None:
         return False
     return user.check_login(password)
+
+@contextmanager
+def visit_user_or_error(username, code):
+    u =  get_user_by_name(username)
+    if u is None:
+        flask.abort(code)
+    else:
+        yield u
