@@ -18,17 +18,6 @@ from contextlib import contextmanager
 
 log = logging.getLogger(__name__)
 
-@contextmanager
-def get_session_user_or_abort(code):
-    if 'user' in session:
-        u = session["user"]
-        yield models.get_user_by_name(u)
-    else:
-        flask.abort(code)
-
-def is_logged_in():
-    return 'user' in session
-
 @app.route("/login/", methods=["GET", "POST"])
 def oniichan_login():
     """
@@ -70,13 +59,13 @@ def oniichan_index():
     """
     serve index page
     """
-    if is_logged_in():
-        with get_session_user_or_abort(404) as user:
+    if util.is_logged_in():
+        with util.get_session_user_or_abort(404) as user:
             return redirect(user.url())
     return template("index.html", title="oniichan engine")
 
 @app.route("/logout/")
 def oniichan_logout():
-    if is_logged_in():
+    if util.is_logged_in():
         del session["user"]
     return redirect("/")

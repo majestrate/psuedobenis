@@ -1,9 +1,26 @@
+import flask
+from flask import session
+from oniichan import models
 
 import base64
 import datetime
 import hashlib
 import os
 import time
+
+from contextlib import contextmanager
+
+@contextmanager
+def get_session_user_or_abort(code):
+    if 'user' in session:
+        u = session["user"]
+        yield models.get_user_by_name(u)
+    else:
+        flask.abort(code)
+
+def is_logged_in():
+    return 'user' in session
+
 
 def now():
     return int(time.time())
