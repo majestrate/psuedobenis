@@ -2,9 +2,7 @@ from oniichan import app
 from oniichan import models
 from oniichan import templates
 from oniichan import config
-from oniichan import spam
 from oniichan import util
-from oniichan.lib import audio
 import flask
 from flask import render_template as template
 from flask import flash, redirect, url_for
@@ -16,7 +14,7 @@ import string
 
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login/", methods=["GET", "POST"])
 def oniichan_login():
     """
     user login route
@@ -28,6 +26,11 @@ def oniichan_login():
         else:
             flash("login failed")
     return template("login.html", title="log in")
+
+
+@app.route("/register/")
+def oniichan_register():
+    return template("register.html", title="register new account")
 
 @app.route("/")
 def oniichan_index():
