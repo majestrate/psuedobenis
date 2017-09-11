@@ -67,3 +67,9 @@ pre {
     border-radius: 10px;
     border-color: #343434;
 }
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    left: 40%;
+}
